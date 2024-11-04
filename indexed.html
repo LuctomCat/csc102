@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marquit Simulator</title>
+  <style>
+    /* Buttons and Backgrounds */
+    body {
+      background-color: #f0f8ff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    #memeImage {
+      position: absolute;
+      width: 200px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+    }
+
+    #startButton {
+      background-color: #28a745;
+      color: white;
+      border: none;
+    }
+
+    #stopButton {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Start button -->
+  <button id="startButton" onclick="startMovement()">Start</button>
+  <!-- Stop button -->
+  <button id="stopButton" onclick="stopMovement()" disabled>Stop</button>
+  <!-- Live Marquit Reaction -->
+  <img id="memeImage" src="Live Marquit Reaction.png" alt="Meme Image">
+
+  <script>
+    // Get Marquit to appear at 3am (gone wrong)
+    let intervalId;
+    const memeImage = document.getElementById("memeImage");
+
+    // Code to move the image. Sometimes Marquit covers the button to stop moving. Marquit is self aware.
+    function moveImage() {
+      const x = Math.random() * (window.innerWidth - memeImage.width);
+      const y = Math.random() * (window.innerHeight - memeImage.height);
+      
+      memeImage.style.left = x + "px";
+      memeImage.style.top = y + "px";
+    }
+
+    // Start button code
+    function startMovement() {
+      intervalId = setInterval(moveImage, 500);
+
+      document.getElementById("startButton").disabled = true;
+      document.getElementById("stopButton").disabled = false;
+    }
+
+    // Stop button code
+    function stopMovement() {
+      clearInterval(intervalId);
+
+      document.getElementById("startButton").disabled = false;
+      document.getElementById("stopButton").disabled = true;
+    }
+  </script>
+
+</body>
+</html>
