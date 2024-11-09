@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palindrome Checker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    h1 {
+      color: #0077b6;
+    }
+    input {
+      padding: 10px;
+      width: 300px;
+      margin: 10px 0;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      background-color: #0077b6;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #005f8c;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <!-- title -->
+  <h1>Is It a Palindrome?</h1>
+  <!-- input -->
+  <input type="text" id="userInput" placeholder="Enter a word or phrase" />
+  <!-- palindrome check button -->
+  <button id="checkPalindrome">Check Palindrome</button>
+  <!-- result area -->
+  <div id="result"></div>
+
+  <!-- try again button to reset page -->
+  <button id="tryAgain" style="display: none;">Try Another Word</button>
+
+  <script>
+    const userInput = document.getElementById('userInput');
+    const checkPalindromeButton = document.getElementById('checkPalindrome');
+    const resultDiv = document.getElementById('result');
+    const tryAgainButton = document.getElementById('tryAgain');
+
+    // check if palindrome
+    function isPalindrome(str) {
+      // Remove spaces and convert to lowercase
+      const cleanedStr = str.replace(/\s+/g, '').toLowerCase();
+      // Check if the cleaned string is equal to its reverse
+      return cleanedStr === cleanedStr.split('').reverse().join('');
+    }
+
+    // check palindrome button functionality
+    checkPalindromeButton.addEventListener('click', () => {
+      const input = userInput.value;
+      // check if palindrome
+      if (isPalindrome(input)) {
+        resultDiv.textContent = `"${input}" is a palindrome! 🎉`;
+        resultDiv.style.color = 'green';
+      } else {
+        resultDiv.textContent = `"${input}" is not a palindrome. ❌`;
+        resultDiv.style.color = 'red';
+      }
+      // show try again button
+      tryAgainButton.style.display = 'inline-block';
+      checkPalindromeButton.style.display = 'none';
+    });
+
+    // try again button functionality
+    tryAgainButton.addEventListener('click', () => {
+      userInput.value = '';
+      resultDiv.textContent = '';
+      checkPalindromeButton.style.display = 'inline-block';
+      tryAgainButton.style.display = 'none';
+      userInput.focus();
+    });
+  </script>
+</body>
+</html>
